@@ -32,8 +32,8 @@
     //     video.style.marginTop = window.innerHeight - video.videoHeight
     // })
 
-    const videoId = location.pathname.slice(1);
-    video.src = `videos/${videoId}`;
+    const videoId = location.pathname.replace("/watch/","");
+    video.src = `/videos/${videoId}`;
     video.addEventListener( "loadedmetadata", function (e) {
         var width = this.videoWidth,
             height = this.videoHeight;
@@ -41,7 +41,8 @@
 
     socket.emit('client-registration', {videoId: videoId});
 
-    socket.on('reset', function(msg){
+    socket.on('restart', function(msg){
+        console.log('restart');
         video.currentTime = 0;
     });
 

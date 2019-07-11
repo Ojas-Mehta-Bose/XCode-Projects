@@ -7,7 +7,7 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/:videoId', function(req, res){
+app.get('/watch/:videoId', function(req, res){
     res.sendFile(__dirname + '/video.html');
 });
 
@@ -19,16 +19,18 @@ app.get('/images/:videoId', function(req, res){
   res.sendFile(__dirname + `/images/${req.params.videoId}.jpg`);
 });
 
-const LATENCY_FUDGE = 0.1;
+const LATENCY_FUDGE = -0.1;
 app.get('/progress/:videoId', function(req, res){
     getVideoProgress(Math.random()+"", req.params.videoId, (progress) => {
+        console.log(`progress asked for ${req.params.videoId}`);
         res.json({ progress: Math.max(0.0, progress-LATENCY_FUDGE) });
     } )
 });
 
 app.get('/restart', function(req, res){
     for(let videoId in clientsRegistered){
-        clientsRegistered[videoId].emit('reset', {});
+        console.log('restart');
+        clientsRegistered[videoId].emit('restart', {});
     }
     res.json({ success: true });
 });
