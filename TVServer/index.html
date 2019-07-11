@@ -33,15 +33,7 @@
     //     video.style.marginTop = window.innerHeight - video.videoHeight
     // })
 
-    var urlParams = new URLSearchParams(window.location.search);
-
-    if(urlParams.has('video') === false){
-        // const error = `'video' parameter required for this webpage's URL`;
-        // window.alert(error);
-        // throw new Error(error);
-    }
-
-    const videoId = urlParams.get('video');
+    const videoId = location.pathname.slice(1);
     video.src = `videos/${videoId}`;
 
     socket.emit('client-registration', {videoId: videoId});

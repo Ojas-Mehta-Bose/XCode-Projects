@@ -4,11 +4,26 @@ var io = require('socket.io')(http);
 const port = 8080;
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+    const homePage = `
+<h1>Available Videos</h1>
+<ul>
+    <li>Sports Desk (<a href="videos/sports-desk">Video</a> | <a href="images/sports-desk">Image</a>)</a></li>
+    <li>Soccer (<a href="videos/soccer">Video</a> | <a href="images/soccer">Image</a>)</a></li>
+</ul>
+`;
+    res.send(homePage);
+});
+
+app.get('/:videoId', function(req, res){
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.get('/videos/:videoId', function(req, res){
   res.sendFile(__dirname + `/videos/${req.params.videoId}.mp4`);
+});
+
+app.get('/images/:videoId', function(req, res){
+  res.sendFile(__dirname + `/images/${req.params.videoId}.jpg`);
 });
 
 const LATENCY_FUDGE = 0.1;
