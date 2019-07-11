@@ -34,13 +34,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - View Controller Life Cycle
     
     var audioPlayer = [AVAudioPlayer]()
+    var videoIds = [String]();
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         do{
-            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "raw", ofType: "mp3")!)))
-            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "footballMp3", ofType: "mp3")!)))
+            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "soccer", ofType: "mp3")!)))
+            
+            videoIds.append("soccer");
+            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "sports-desk", ofType: "mp3")!)))
+            
+            videoIds.append("sports-desk");
             for i in 0...1
             {
                 audioPlayer[i].prepareToPlay()
@@ -143,7 +148,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }//END SWITCH
             if track < 99
             {
-            self.playAudio(track: track)
+                //self.playAudio(track: track)
+                let urlPath: String = "http://192.168.50.237:8080/progress/\(self.videoIds[track])"
+                let url: NSURL = NSURL(string: urlPath)!
+                let request1: NSURLRequest = NSURLRequest(url: url as URL)
+                let queue:OperationQueue = OperationQueue()
+                
+                NSURLConnection.sendAsynchronousRequest(request1 as URLRequest, queue: queue, completionHandler:{ (response: URLResponse?, data: Data?, error: Error?) -> Void in
+                    
+                    do {
+                        if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
+                            
+                            if let progress = jsonResult["progress"] as? Double {
+                                // access individual value in dictionary
+                                print(progress)
+                                self.audioPlayer[track].currentTime = progress;
+                                self.playAudio(track: track)
+                            }
+                        }
+                    } catch let error as NSError {
+                        print(error.localizedDescription)
+                    }
+                })
             }
         }
     }
@@ -164,7 +190,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if(track != i)
             {
                 audioPlayer[i].setVolume(0.0, fadeDuration: 0)
-                print("audio: " + String(i) + " " + String(audioPlayer[i].currentTime))
+                //print("audio: " + String(i) + " " + String(audioPlayer[i].currentTime))
             }
         }
         

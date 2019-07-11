@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E24F60922D6B1DF0069F77F /* soccer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1E24F60822D6B1DF0069F77F /* soccer.mp3 */; };
+		1E24F60B22D6B3BC0069F77F /* sports-desk.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1E24F60A22D6B3BC0069F77F /* sports-desk.mp3 */; };
 		3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */; };
 		3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3929C48D1E89EC2C00E00B60 /* ViewController.swift */; };
 		3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3929C48F1E89EC2C00E00B60 /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1E24F60822D6B1DF0069F77F /* soccer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soccer.mp3; sourceTree = "<group>"; };
+		1E24F60A22D6B3BC0069F77F /* sports-desk.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "sports-desk.mp3"; sourceTree = "<group>"; };
 		3929C4881E89EC2C00E00B60 /* ARKitImageDetection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitImageDetection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3929C48D1E89EC2C00E00B60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 		C72597C522D3E15200DB1E9B /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				1E24F60A22D6B3BC0069F77F /* sports-desk.mp3 */,
+				1E24F60822D6B1DF0069F77F /* soccer.mp3 */,
 				C747CEFE22D67B2E00225105 /* raw.mp3 */,
 				C747CEFC22D6478A00225105 /* footballMp3.mp3 */,
 				C747CEFA22D6404400225105 /* soccerMp3.mp3 */,
@@ -166,7 +172,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = UHYBFMQ7A6;
+						DevelopmentTeam = AQ6SS5834T;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -195,11 +201,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E24F60922D6B1DF0069F77F /* soccer.mp3 in Resources */,
 				C747CEFF22D67B2E00225105 /* raw.mp3 in Resources */,
 				C747CEFD22D6478A00225105 /* footballMp3.mp3 in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
 				C747CEFB22D6404400225105 /* soccerMp3.mp3 in Resources */,
 				C72597CD22D4D20C00DB1E9B /* sample2.mp3 in Resources */,
+				1E24F60B22D6B3BC0069F77F /* sports-desk.mp3 in Resources */,
 				C72597CB22D4D1F200DB1E9B /* sample1.mp3 in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
 				C72597C722D3E1A900DB1E9B /* sample.mp3 in Resources */,
@@ -358,7 +366,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UHYBFMQ7A6;
+				DEVELOPMENT_TEAM = AQ6SS5834T;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageDetection/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-detection${SAMPLE_CODE_DISAMBIGUATOR}";
@@ -377,7 +385,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UHYBFMQ7A6;
+				DEVELOPMENT_TEAM = AQ6SS5834T;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageDetection/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-detection${SAMPLE_CODE_DISAMBIGUATOR}";

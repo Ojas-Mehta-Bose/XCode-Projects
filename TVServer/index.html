@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TV</title>
+    <style>
+        body{
+            margin: 0px;
+            background: black;
+            height: 100%;
+        }
+        video{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            background: silver;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <video id="video" autoplay muted controls loop>
+
+    </video>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    const video = document.getElementById('video');
+
+    // window.addEventListener('resize', ()=>{
+    //     video.style.marginTop = window.innerHeight - video.videoHeight
+    // })
+
+    var urlParams = new URLSearchParams(window.location.search);
+
+    if(urlParams.has('video') === false){
+        // const error = `'video' parameter required for this webpage's URL`;
+        // window.alert(error);
+        // throw new Error(error);
+    }
+
+    const videoId = urlParams.get('video');
+    video.src = `videos/${videoId}`;
+
+    socket.emit('client-registration', {videoId: videoId});
+
+    socket.on('reset', function(msg){
+        video.currentTime = 0;
+    });
+
+    socket.on('get-video-progress', function(msg){
+        socket.emit('video-progress', {requestId: msg.requestId, videoId: videoId, progress: video.currentTime });
+    });
+
+    // Soccer
+    // https://www.youtube.com/watch?v=aw1tQ1fiNg4
+
+    // Sports Desk
+    // https://www.youtube.com/watch?v=cuV4g0Bl8pg
+
+    </script>
+</body>
+</html>
