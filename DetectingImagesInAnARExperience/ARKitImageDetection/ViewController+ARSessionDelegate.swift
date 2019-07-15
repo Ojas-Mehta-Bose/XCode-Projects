@@ -85,6 +85,13 @@ extension ViewController: ARSessionDelegate {
         
         statusViewController.cancelAllScheduledMessages()
         
+        for i in 0...audioPlayer.count-1
+        {
+            audioPlayer[i].currentTime = 0.0
+            audioPlayer[i].stop()
+            
+        }
+        pressedReset = true;
         resetTracking()
         
         // Disable restart for a while in order to give the session time to restart.
