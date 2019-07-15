@@ -15,12 +15,8 @@
 		3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3929C4921E89EC2C00E00B60 /* Assets.xcassets */; };
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
-		C72597C722D3E1A900DB1E9B /* sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C72597C622D3E1A900DB1E9B /* sample.mp3 */; };
-		C72597CB22D4D1F200DB1E9B /* sample1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C72597CA22D4D1F200DB1E9B /* sample1.mp3 */; };
-		C72597CD22D4D20C00DB1E9B /* sample2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C72597CC22D4D20C00DB1E9B /* sample2.mp3 */; };
-		C747CEFB22D6404400225105 /* soccerMp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C747CEFA22D6404400225105 /* soccerMp3.mp3 */; };
-		C747CEFD22D6478A00225105 /* footballMp3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C747CEFC22D6478A00225105 /* footballMp3.mp3 */; };
-		C747CEFF22D67B2E00225105 /* raw.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C747CEFE22D67B2E00225105 /* raw.mp3 */; };
+		C747CF0322D8D8E400225105 /* detectedSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C747CF0222D8D8E400225105 /* detectedSound.mp3 */; };
+		C747CF0722D8E17B00225105 /* avengers.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C747CF0622D8E17B00225105 /* avengers.mp3 */; };
 		C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,12 +33,8 @@
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9ECB75A09ECB71B000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
-		C72597C622D3E1A900DB1E9B /* sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sample.mp3; sourceTree = "<group>"; };
-		C72597CA22D4D1F200DB1E9B /* sample1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sample1.mp3; sourceTree = "<group>"; };
-		C72597CC22D4D20C00DB1E9B /* sample2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sample2.mp3; sourceTree = "<group>"; };
-		C747CEFA22D6404400225105 /* soccerMp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = soccerMp3.mp3; sourceTree = "<group>"; };
-		C747CEFC22D6478A00225105 /* footballMp3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = footballMp3.mp3; sourceTree = "<group>"; };
-		C747CEFE22D67B2E00225105 /* raw.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = raw.mp3; sourceTree = "<group>"; };
+		C747CF0222D8D8E400225105 /* detectedSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = detectedSound.mp3; sourceTree = "<group>"; };
+		C747CF0622D8E17B00225105 /* avengers.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = avengers.mp3; sourceTree = "<group>"; };
 		C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		FEE43140FEE56DE000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +63,7 @@
 			children = (
 				3929C4921E89EC2C00E00B60 /* Assets.xcassets */,
 				3929C4971E89EC2C00E00B60 /* Info.plist */,
-				C72597C522D3E15200DB1E9B /* Music */,
+				C72597C522D3E15200DB1E9B /* Audio */,
 				3929C48F1E89EC2C00E00B60 /* Main.storyboard */,
 				39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */,
 			);
@@ -117,19 +109,15 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
-		C72597C522D3E15200DB1E9B /* Music */ = {
+		C72597C522D3E15200DB1E9B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				C747CF0222D8D8E400225105 /* detectedSound.mp3 */,
 				1E24F60A22D6B3BC0069F77F /* sports-desk.mp3 */,
 				1E24F60822D6B1DF0069F77F /* soccer.mp3 */,
-				C747CEFE22D67B2E00225105 /* raw.mp3 */,
-				C747CEFC22D6478A00225105 /* footballMp3.mp3 */,
-				C747CEFA22D6404400225105 /* soccerMp3.mp3 */,
-				C72597CA22D4D1F200DB1E9B /* sample1.mp3 */,
-				C72597CC22D4D20C00DB1E9B /* sample2.mp3 */,
-				C72597C622D3E1A900DB1E9B /* sample.mp3 */,
+				C747CF0622D8E17B00225105 /* avengers.mp3 */,
 			);
-			path = Music;
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		FEE62D80FEE6331000000001 /* LICENSE */ = {
@@ -172,9 +160,14 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = AQ6SS5834T;
+						DevelopmentTeam = UHYBFMQ7A6;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -202,15 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E24F60922D6B1DF0069F77F /* soccer.mp3 in Resources */,
-				C747CEFF22D67B2E00225105 /* raw.mp3 in Resources */,
-				C747CEFD22D6478A00225105 /* footballMp3.mp3 in Resources */,
 				39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */,
-				C747CEFB22D6404400225105 /* soccerMp3.mp3 in Resources */,
-				C72597CD22D4D20C00DB1E9B /* sample2.mp3 in Resources */,
 				1E24F60B22D6B3BC0069F77F /* sports-desk.mp3 in Resources */,
-				C72597CB22D4D1F200DB1E9B /* sample1.mp3 in Resources */,
 				3929C4931E89EC2C00E00B60 /* Assets.xcassets in Resources */,
-				C72597C722D3E1A900DB1E9B /* sample.mp3 in Resources */,
+				C747CF0722D8E17B00225105 /* avengers.mp3 in Resources */,
+				C747CF0322D8D8E400225105 /* detectedSound.mp3 in Resources */,
 				3929C4911E89EC2C00E00B60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +355,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AQ6SS5834T;
+				DEVELOPMENT_TEAM = UHYBFMQ7A6;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageDetection/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-detection${SAMPLE_CODE_DISAMBIGUATOR}";
@@ -385,7 +374,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AQ6SS5834T;
+				DEVELOPMENT_TEAM = UHYBFMQ7A6;
 				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageDetection/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-detection${SAMPLE_CODE_DISAMBIGUATOR}";

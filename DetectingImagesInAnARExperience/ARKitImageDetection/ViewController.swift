@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-Main view controller for the AR experience.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ Main view controller for the AR experience.
+ */
 
 import ARKit
 import SceneKit
@@ -34,72 +34,89 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - View Controller Life Cycle
     
     var audioPlayer = [AVAudioPlayer]()
+    var detectedSound = AVAudioPlayer()
     var videoIds = [String]();
+    var pressedReset = false
+    var isTrackInitialized = [false,false]
+    var track:Int = 99
     
+    var videoFiles = ["soccer", "sports-desk", "avengers"]
+    var audioFiles = ["soccer", "sports-desk", "avengers"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Load audio files and prepare to play them | Load their corresponding ids to the server
         do{
-            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "soccer", ofType: "mp3")!)))
-            
-            videoIds.append("soccer");
-            try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "sports-desk", ofType: "mp3")!)))
-            
-            videoIds.append("sports-desk");
-            for i in 0...1
+            for i in 0...(videoFiles.count-1)
             {
+                try audioPlayer.append(AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: videoFiles[i], ofType: "mp3")!)))
+                videoIds.append(videoFiles[i]);
+                audioPlayer[i].numberOfLoops = 99
                 audioPlayer[i].prepareToPlay()
             }
+            //Load the "image detected" sound
+            try detectedSound = (AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "detectedSound", ofType: "mp3")!)))
+            detectedSound.prepareToPlay()
         }
         catch{
             print(error)
         }
         
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+            print("Playback OK")
+            try AVAudioSession.sharedInstance().setActive(true)
+            print("Session is Active")
+        } catch {
+            print(error)
+        }
+        
         sceneView.delegate = self
         sceneView.session.delegate = self
-
+        
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
         }
     }
-
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		// Prevent the screen from being dimmed to avoid interuppting the AR experience.
-		UIApplication.shared.isIdleTimerDisabled = true
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         // Start the AR experience
         resetTracking()
-	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-		super.viewWillDisappear(animated)
-
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
         session.pause()
-	}
-
+    }
+    
     // MARK: - Session management (Image detection setup)
     
     /// Prevents restarting the session while a restart is in progress.
     var isRestartAvailable = true
-
+    
     /// Creates a new AR configuration to run on the `session`.
     /// - Tag: ARReferenceImage-Loading
-	func resetTracking() {
+    func resetTracking() {
         
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
             fatalError("Missing expected asset catalog resources.")
         }
         
         let configuration = ARImageTrackingConfiguration()
+        configuration.isAutoFocusEnabled = true
         configuration.trackingImages = referenceImages
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
-
+        
         statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
     }
-
+    
     // MARK: - ARSCNViewDelegate (Image detection results)
     /// - Tag: ARImageAnchor-Visualizing}
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
@@ -120,36 +137,49 @@ class ViewController: UIViewController, ARSCNViewDelegate {
              */
             planeNode.eulerAngles.x = -.pi / 2
             
-            /*
-             Image anchors are not tracked after initial detection, so create an
-             animation that limits the duration for which the plane visualization appears.
-             */
-            //planeNode.runAction(self.imageHighlightAction)
-
             // Add the plane visualization to the scene.
             node.addChildNode(planeNode)
-
-          //  self.resetTracking()
         }
-
+        
         DispatchQueue.main.async {
-            var track:Int = 99
+            var previousTrack:Int = 99
             let imageName = referenceImage.name ?? ""
             self.statusViewController.cancelAllScheduledMessages()
             self.statusViewController.showMessage("Detected image “\(imageName)”")
+            previousTrack = self.track
             
+            if self.pressedReset{
+                previousTrack = 99
+                self.pressedReset = false
+            }
+            
+           /* //Load the corresponding track based on the name of the detected reference image
             switch imageName{
-            case "demo0":
-                track = 0
-            case "demo1":
-                track = 1
+            case "soccer":
+                self.track = 0
+            case "sports-desk":
+                self.track = 1
+            case "avengers":
+                self.track = 2
             default:
                 print("Track not detected")
-            }//END SWITCH
-            if track < 99
+            }//END SWITCH*/
+            
+            for i in 0...self.videoFiles.count-1
             {
-                //self.playAudio(track: track)
-                let urlPath: String = "http://192.168.50.237:8080/progress/\(self.videoIds[track])"
+                if imageName == self.videoFiles[i]
+                {
+                    self.track = i
+                    break;
+                }
+            }
+            
+            //Switch track if a new image is detected, otherwise keep playing the audio files without retriving new positions
+            if previousTrack != self.track
+            {
+                //HOME WIFI IP let urlPath: String = "http://192.168.86.89:8080/progress/\(self.videoIds[self.track])"
+                
+                let urlPath: String = "http://192.168.50.202:8080/progress/\(self.videoIds[self.track])"
                 let url: NSURL = NSURL(string: urlPath)!
                 let request1: NSURLRequest = NSURLRequest(url: url as URL)
                 let queue:OperationQueue = OperationQueue()
@@ -158,12 +188,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     
                     do {
                         if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
-                            
                             if let progress = jsonResult["progress"] as? Double {
                                 // access individual value in dictionary
                                 print(progress)
-                                self.audioPlayer[track].currentTime = progress;
-                                self.playAudio(track: track)
+                                if (self.audioPlayer[self.track].volume == 0.0 || self.audioPlayer[self.track].isPlaying == false)
+                                {
+                                    self.detectedSound.currentTime = 0.0
+                                    self.detectedSound.play()
+                                    self.audioPlayer[self.track].currentTime = progress;
+                                    self.playAudio(track: self.track)
+                                    print("Played Audio track:" + String(self.track))
+                                }
                             }
                         }
                     } catch let error as NSError {
@@ -173,29 +208,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-
-    var imageHighlightAction: SCNAction {
-        return .sequence([
-            .wait(duration: 100), //How long to show rectangle
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOpacity(to: 0.15, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOut(duration: 0.5),
-            .removeFromParentNode()
-        ])
-    }
     func playAudio(track:Int)
     {
-        for i in 0...1 {
+        for i in 0...(videoFiles.count-1) {
             if(track != i)
             {
                 audioPlayer[i].setVolume(0.0, fadeDuration: 0)
-                //print("audio: " + String(i) + " " + String(audioPlayer[i].currentTime))
             }
         }
-        
         audioPlayer[track].setVolume(1.0, fadeDuration: 0)
         audioPlayer[track].play()
-        
     }
 }
+
