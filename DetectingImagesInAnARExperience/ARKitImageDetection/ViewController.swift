@@ -40,8 +40,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var isTrackInitialized = [false,false]
     var track:Int = 99
     
-    var videoFiles = ["soccer", "sports-desk", "avengers"]
-    var audioFiles = ["soccer", "sports-desk", "avengers"]
+    var videoFiles = ["Goodwood", "NFL", "MLB"]
+    var audioFiles = ["Goodwood", "NFL", "MLB"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,25 +153,29 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.pressedReset = false
             }
             
-           /* //Load the corresponding track based on the name of the detected reference image
-            switch imageName{
-            case "soccer":
+            /* //Load the corresponding track based on the name of the detected reference image
+             switch imageName{
+             case "soccer":
+             self.track = 0
+             case "sports-desk":
+             self.track = 1
+             case "avengers":
+             self.track = 2
+             default:
+             print("Track not detected")
+             }//END SWITCH*/
+            
+            let index = imageName.index(imageName.startIndex, offsetBy: 0)
+            let char = imageName[index]
+            switch char{
+            case "G":
                 self.track = 0
-            case "sports-desk":
+            case "N":
                 self.track = 1
-            case "avengers":
+            case "M":
                 self.track = 2
             default:
-                print("Track not detected")
-            }//END SWITCH*/
-            
-            for i in 0...self.videoFiles.count-1
-            {
-                if imageName == self.videoFiles[i]
-                {
-                    self.track = i
-                    break;
-                }
+                print("No track found")
             }
             
             //Switch track if a new image is detected, otherwise keep playing the audio files without retriving new positions

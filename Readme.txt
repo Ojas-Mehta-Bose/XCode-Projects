@@ -1,0 +1,1 @@
+Of the two demos, one uses the fron and back of image of a "Nintendo LABO" box to trigger audio input. The other uses video frames processed from the camera viewfinder. There is a slight detection latency because of many input files. They will be stripped out in the next commit leaving only "Goodwood" and "MLB".
