@@ -40,8 +40,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var isTrackInitialized = [false,false]
     var track:Int = 99
     
-    var videoFiles = ["Liverpool", "sports-desk", "avengers", "Goodwood", "NFL", "MLB"]
-    var audioFiles = ["Liverpool", "sports-desk", "avengers", "Goodwood", "NFL", "MLB"]
+    var videoFiles = ["NFL","MLB", "Goodwood"]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -153,39 +152,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.pressedReset = false
             }
             
-           /* //Load the corresponding track based on the name of the detected reference image
-            switch imageName{
-            case "soccer":
-                self.track = 0
-            case "sports-desk":
-                self.track = 1
-            case "avengers":
-                self.track = 2
-            default:
-                print("Track not detected")
-            }//END SWITCH*/
-            //["Liverpool", "sports-desk", "avengers", "Goodwood", "NFL", "MLB", "HilariousCommentary"]
-            let index = imageName.index(imageName.startIndex, offsetBy: 0)
-            let char = imageName[index]
-            switch char{
-            case "L":
-                self.track = 0
-            case "s":
-                self.track = 1
-            case "a":
-                self.track = 2
-            case "G":
-                self.track = 3
-            case "N":
-                self.track = 4
-            case "M":
-                self.track = 5
-            case "H":
-                self.track = 6
-            default:
-                print("No track found")
-            }
+//            //Load the corresponding track based on the name of the detected reference image
+//            if imageName == "Goodwood"
+//            {
+//                self.track = 0
+//            }
+//
+//            else{
+//                self.track = 1
+//            }
             
+            switch imageName{
+            case self.videoFiles[0]:
+                self.track = 0
+            case self.videoFiles[1]:
+                self.track = 1
+            case self.videoFiles[2]:
+                self.track = 2
+            default:
+                print("Track not found")
+            }
             //Switch track if a new image is detected, otherwise keep playing the audio files without retriving new positions
             if previousTrack != self.track
             {
@@ -202,14 +188,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary {
                             if let progress = jsonResult["progress"] as? Double {
                                 // access individual value in dictionary
-                                print(progress)
                                 if (self.audioPlayer[self.track].volume == 0.0 || self.audioPlayer[self.track].isPlaying == false)
                                 {
-                                    self.detectedSound.currentTime = 0.0
                                     self.detectedSound.play()
                                     self.audioPlayer[self.track].currentTime = progress;
-                                    self.playAudio(track: self.track)
-                                    print("Played Audio track:" + String(self.track))
+                                    self.playAudio(track: self.track, previousTrack: previousTrack)
+                                    self.detectedSound.currentTime = 0.0
                                 }
                             }
                         }
@@ -220,16 +204,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             }
         }
     }
-    func playAudio(track:Int)
+    func playAudio(track:Int, previousTrack:Int)
     {
-        for i in 0...(videoFiles.count-1) {
-            if(track != i)
-            {
-                audioPlayer[i].setVolume(0.0, fadeDuration: 0)
-            }
+        if previousTrack != 99
+        {
+        audioPlayer[previousTrack].setVolume(0.0, fadeDuration: 0)
         }
         audioPlayer[track].setVolume(1.0, fadeDuration: 0)
         audioPlayer[track].play()
     }
 }
-

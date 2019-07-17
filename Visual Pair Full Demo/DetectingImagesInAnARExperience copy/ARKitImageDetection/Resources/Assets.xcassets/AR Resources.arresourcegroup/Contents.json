@@ -5,22 +5,10 @@
   },
   "resources" : [
     {
-      "filename" : "avengers.arreferenceimage"
-    },
-    {
-      "filename" : "Goodwood.arreferenceimage"
-    },
-    {
-      "filename" : "Liverpool.arreferenceimage"
-    },
-    {
       "filename" : "MLB.arreferenceimage"
     },
     {
       "filename" : "NFL.arreferenceimage"
-    },
-    {
-      "filename" : "sports-desk.arreferenceimage"
     }
   ]
 }

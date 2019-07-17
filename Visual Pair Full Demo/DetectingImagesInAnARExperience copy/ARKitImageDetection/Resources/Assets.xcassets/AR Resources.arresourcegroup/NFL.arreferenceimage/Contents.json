@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "NFL.jpeg"
+      "filename" : "Goodwood.JPG"
     }
   ],
   "info" : {
@@ -10,6 +10,7 @@
     "author" : "xcode"
   },
   "properties" : {
-    "width" : 10
+    "width" : 56,
+    "unit" : "inches"
   }
 }
